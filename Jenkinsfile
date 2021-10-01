@@ -29,6 +29,11 @@ pipeline {
         }
       
         stage ('build maven') {
+            when {
+                expression {
+                    !skipRemainingStages
+                }
+            }
             steps {
                
                     sh 'mvn package'
