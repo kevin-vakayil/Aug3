@@ -20,6 +20,11 @@ pipeline {
             steps {
                
                     sh 'mvn test'
+                 script {
+                    skipRemainingStages = true
+
+                    println "skipRemainingStages = ${skipRemainingStages}"
+                }
                 
             }
         }
