@@ -10,10 +10,11 @@ pipeline {
             }
         }
         post{
+            success {
+                }
              failure {
                     script{
-                        sh "exit 1"
-                        //or
+                        
                         error "Failed, exiting now..."
                     }
                 }
@@ -25,10 +26,11 @@ pipeline {
             }
         }
        post{
+           success {
+                }
              failure {
                     script{
-                        sh "exit 1"
-                        //or
+                       
                         error "Failed, exiting now..."
                     }
                 }
