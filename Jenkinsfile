@@ -17,7 +17,7 @@ pipeline {
        
         stage ('test maven') {
             when {
-                expression {
+                skipRemainingStages = false {
                     !skipRemainingStages
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
       
         stage ('build maven') {
             when {
-                expression {
+                skipRemainingStages = false {
                     !skipRemainingStages
                 }
             }
