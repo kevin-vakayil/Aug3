@@ -16,13 +16,7 @@ pipeline {
         }
        
         stage ('test maven') {
-            script {
-            if (skipRemainingStages == false) {
-                 
-                    !skipRemainingStages
-                
-            }
-            }
+            when { skipRemainingStages == false {  !skipRemainingStages } }
             steps {
                
                     sh 'mvn test'
@@ -31,13 +25,7 @@ pipeline {
         }
       
         stage ('build maven') {
-           script {
-            if (skipRemainingStages == false) {
-                 
-                    !skipRemainingStages
-                
-            }
-            }
+            when { skipRemainingStages == false {  !skipRemainingStages } }
             steps {
                
                     sh 'mvn package'
