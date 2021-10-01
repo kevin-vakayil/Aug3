@@ -16,10 +16,12 @@ pipeline {
         }
        
         stage ('test maven') {
+            script {
             if (skipRemainingStages == false) {
                  
                     !skipRemainingStages
                 
+            }
             }
             steps {
                
@@ -29,10 +31,12 @@ pipeline {
         }
       
         stage ('build maven') {
-            if (skipRemainingStages == false)  {
-                
+           script {
+            if (skipRemainingStages == false) {
+                 
                     !skipRemainingStages
                 
+            }
             }
             steps {
                
