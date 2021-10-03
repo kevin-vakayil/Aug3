@@ -10,9 +10,14 @@ pipeline {
                   try {
                         sh 'mvn compil'
                      } catch(Exception e) {
-                         currentBuild.result = "FAILED"
-                         throw e                                          }
-                     }            
+                       skipRemainingStages = true
+            }
+
+            if (skipRemainingStages) {
+                currentBuild.result = 'FAILURE'
+                error("Stopping early!")
+            }
+       
                 }
                                 }
         
