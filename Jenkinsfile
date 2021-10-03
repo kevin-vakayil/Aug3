@@ -20,7 +20,7 @@ pipeline {
         }
         
         stage ('Testmaven') {
-                when { equals continueBuild: true, actual: Testmaven }
+                when { continueBuild expected: true, actual: Testmaven }
 
         
             steps {
