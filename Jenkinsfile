@@ -32,7 +32,8 @@ pipeline {
                      } finally {
                       echo '[FAILURE] Failed to build' 
                       currentBuild.result = 'FAILURE'
-                      return
+                      throw(error)
+                      
               }
                 
                     }  
