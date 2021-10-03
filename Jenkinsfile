@@ -12,8 +12,6 @@ pipeline {
                      } finally {
                       echo '[FAILURE] Failed to build'
                       continueBuild = false
-                      currentBuild.result = 'ABORTED'
-                      error('Stopping early…')
               }
                 }            
         }
@@ -28,7 +26,7 @@ pipeline {
                                 }
                  
                  try {
-                      sh 'mvn tet'
+                      sh 'mvn test'
                      } finally {
                       echo '[FAILURE] Failed to build'
                       continueBuild = false
@@ -42,18 +40,8 @@ pipeline {
       
         stage ('build maven') {
             steps {
-                 script{
-            if (!continueBuild) {
-                 currentBuild.result = 'ABORTED'
-                  error('Stopping early…')
-                                }
-                 try {
+               
                     sh 'mvn package'
-                 } finally {
-                      echo '[FAILURE] Failed to build'
-                      continueBuild = false
-              }
-                 }
                 
             }
         }
