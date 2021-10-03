@@ -34,6 +34,7 @@ pipeline {
                       continueBuild = false
                       currentBuild.result = 'ABORTED'
                       error('Stopping early…')
+                      return test maven
               }
                 
                     }  
