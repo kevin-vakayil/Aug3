@@ -25,7 +25,7 @@ pipeline {
                    }
         
             steps {
-             script{
+            script{
                  
                  try {
                       sh 'mvn tes'
