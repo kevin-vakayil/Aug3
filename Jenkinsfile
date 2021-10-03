@@ -9,7 +9,7 @@ pipeline {
             script{
                 try {
                      sh 'mvn compile'
-                     } finally {
+                     } catch(Exception e) {
                       echo '[FAILURE] Failed to build'
                       continueBuild = false
               }
