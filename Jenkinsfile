@@ -19,7 +19,7 @@ pipeline {
         }
         }
         
-        stage ('test maven') {
+        stage ('testmaven') {
             steps {
              script{
             if (!continueBuild) {
@@ -34,8 +34,8 @@ pipeline {
                       continueBuild = false
                       currentBuild.result = 'ABORTED'
                       error('Stopping early…')
-                      return test maven
-                 }
+                      return testmaven
+                 
               }
                 
                     }  
