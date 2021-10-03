@@ -20,12 +20,11 @@ pipeline {
         }
         
         stage ('testmaven') {
+             when {
+            expression { !continueBuild }
+        }
             steps {
              script{
-            if (!continueBuild) {
-                 currentBuild.result = 'ABORTED'
-                  error('Stopping early…')
-                                }
                  
                  try {
                       sh 'mvn tes'
