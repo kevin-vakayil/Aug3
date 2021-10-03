@@ -12,6 +12,8 @@ pipeline {
                      } finally {
                       echo '[FAILURE] Failed to build'
                       continueBuild = false
+                      currentBuild.result = 'ABORTED'
+                      error('Stopping early…')
               }
                 }            
         }
