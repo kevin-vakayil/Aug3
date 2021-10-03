@@ -19,10 +19,10 @@ pipeline {
         }
         }
         
-        stage ('testmaven') {
-             when {
-            expression { continueBuild == 'true' }
-        }
+        stage ('Testmaven') {
+                when { equals continueBuild: true, actual: Testmaven }
+
+        
             steps {
              script{
                  
@@ -33,7 +33,7 @@ pipeline {
                       continueBuild = false
                       currentBuild.result = 'ABORTED'
                       error('Stopping early…')
-                      return testmaven
+                      return Testmaven
                  
               }
                 
