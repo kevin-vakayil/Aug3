@@ -1,4 +1,3 @@
-def skipRemainingStages = false
 pipeline {
     agent any
 
@@ -7,22 +6,13 @@ pipeline {
             steps {
                
                     sh 'mvn compile'
-                catchError {
-            build job: 'system-check-flow'
-        }
-        echo currentBuild.result
-    }
-            }
+          }
         }
        
         stage ('test maven') {
             steps {
                
                     sh 'mvn test'
-                 catchError {
-            build job: 'system-check-flow'
-        }
-        echo currentBuild.result
     }
                 
             }
