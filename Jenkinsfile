@@ -17,7 +17,7 @@ pipeline {
                 currentBuild.result = 'FAILURE'
                 error("Stopping early!")
             }
-       
+                }
                 }
                                 }
         
@@ -65,4 +65,4 @@ pipeline {
     }
 }
 }
-}
+
