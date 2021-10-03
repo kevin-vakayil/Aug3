@@ -10,10 +10,7 @@ pipeline {
                   try {
                         sh 'mvn compil'
                      } catch(Exception e) {
-                      echo '[FAILURE] Failed to build'
-                      continueBuild = false
-                      currentBuild.result = 'ABORTED'
-                      error('Stopping early…')
+                      error "This pipeline stops here!"
                                           }
                      }            
                 }
