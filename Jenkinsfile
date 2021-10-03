@@ -3,7 +3,7 @@ pipeline {
 
     stages {
         stage ('compile maven') {
-            steps {
+            
                
                  def result = sh returnStatus: true, script:  sh 'mvn compil'
                  if (result != 0) {
@@ -11,7 +11,7 @@ pipeline {
                     currentBuild.result = 'FAILURE'
                     sh "exit ${result}"  
                  }
-            }
+            
         }
         
         stage ('test maven') {
