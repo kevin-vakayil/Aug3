@@ -6,14 +6,14 @@ pipeline {
             steps {
                
                     sh 'mvn compile'
-          }
+                
+            }
         }
-       
+        
         stage ('test maven') {
             steps {
                
-                    sh 'mvn test'
-    }
+                    sh 'mvn tes'
                 
             }
         }
