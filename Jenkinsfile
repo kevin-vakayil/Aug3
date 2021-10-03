@@ -20,8 +20,9 @@ pipeline {
         }
         
         stage ('Testmaven') {
-                when { continueBuild expected: true, actual: Testmaven }
-
+            when {
+                       expression { params.continueBuild != 'true' }
+                   }
         
             steps {
              script{
