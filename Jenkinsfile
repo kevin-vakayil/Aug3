@@ -1,4 +1,4 @@
-def continueBuild = true
+def continueBuild = false
 pipeline {
     agent any
 
@@ -11,7 +11,7 @@ pipeline {
                      sh 'mvn compil'
                      } catch(Exception e) {
                       echo '[FAILURE] Failed to build'
-                      continueBuild = false
+                      continueBuild = true
                       currentBuild.result = 'ABORTED'
                       error('Stopping early…')
               }
@@ -21,7 +21,7 @@ pipeline {
         
         stage ('testmaven') {
              when {
-            expression { continueBuild == true }
+            expression { !continueBuild }
         }
             steps {
              script{
