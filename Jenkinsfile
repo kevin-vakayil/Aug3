@@ -5,13 +5,7 @@ pipeline {
         stage ('compile maven') {
             
             steps{
-                script{
-                try {
-                     sh 'mvn compil'
-                     } finally {
-                      echo '[FAILURE] Failed to build'
-              }
-                }
+                sh 'mvn compil'
             }
         }
         
