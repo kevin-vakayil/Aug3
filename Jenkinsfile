@@ -14,6 +14,7 @@ pipeline {
               }
                 }            
         }
+        }
         
         stage ('test maven') {
             steps {
