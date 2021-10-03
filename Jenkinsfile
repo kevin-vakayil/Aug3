@@ -18,14 +18,22 @@ pipeline {
         }
         
         stage ('test maven') {
+            steps {
              script{
             if (!continueBuild) {
                  currentBuild.result = 'ABORTED'
                   error('Stopping early…')
                                 }
+                 
+                 try {
+                      sh 'mvn test'
+                     } finally {
+                      echo '[FAILURE] Failed to build'
+                      continueBuild = False
+              }
+                
                     }  
-            steps {
-                    sh 'mvn test'
+   
                 
             }
         }
