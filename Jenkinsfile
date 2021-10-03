@@ -1,3 +1,4 @@
+def continueBuild = True
 pipeline {
     agent any
 
@@ -10,15 +11,18 @@ pipeline {
                      sh 'mvn compil'
                      } finally {
                       echo '[FAILURE] Failed to build'
-                      error 'Build  Failed'
+                      continueBuild = False
               }
                 }            
         }
         }
         
         stage ('test maven') {
+            if (!continueBuild) {
+    currentBuild.result = 'ABORTED'
+    error('Stopping early…')
+}
             steps {
-               
                     sh 'mvn test'
                 
             }
