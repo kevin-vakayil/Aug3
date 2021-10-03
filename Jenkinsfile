@@ -1,4 +1,4 @@
-def flag = false;
+def continueBuild = true
 pipeline {
     agent any
 
@@ -6,42 +6,43 @@ pipeline {
         stage ('compile maven') {
             
             steps{
-                script{
-                  try {
-                        sh 'mvn compil'
-                        script { flag = true }
+            script{
+                try {
+                     sh 'mvn compile'
                      } catch(Exception e) {
-                       skipRemainingStages = true
-            }
-
-            if (skipRemainingStages) {
-                currentBuild.result = 'FAILURE'
-                error("Stopping early!")
-            }
-                }
-                }
-                                }
+                      echo '[FAILURE] Failed to build'
+                      continueBuild = false
+                      currentBuild.result = 'ABORTED'
+                      error('Stopping early…')
+              }
+                }            
+        }
+        }
         
-        stage ('Testmaven') {
-            when { expression { flag == true } }
-           
+        stage ('testmaven') {
             steps {
-                script{
-                  if (!skipRemainingStages) {
-                     try {
-                          sh 'mvn tes'
-                          } finally {
-                              echo '[FAILURE] Failed to build' 
-                              continueBuild = false
-                              currentBuild.result = 'ABORTED'
-                              error('Stopping early…')
-                              return Testmaven
+             script{
+            if (!continueBuild) {
+                 currentBuild.result = 'ABORTED'
+                  error('Stopping early…')
+                                }
                  
-                                    }     
-                                                }
-                       }     
-                  }
-                             }
+                 try {
+                      sh 'mvn tes'
+                     } finally {
+                      echo '[FAILURE] Failed to build' 
+                      continueBuild = false
+                      currentBuild.result = 'ABORTED'
+                      error('Stopping early…')
+                      return testmaven
+                 
+              }
+                
+                    }  
+   
+                
+            }
+        }
       
         stage ('build maven') {
             steps {
@@ -64,4 +65,3 @@ pipeline {
     }
 }
 }
-
