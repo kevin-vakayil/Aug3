@@ -5,8 +5,12 @@ pipeline {
         stage ('compile maven') {
             steps {
                
-                    sh 'mvn compile'
-                
+                 def result = sh returnStatus: true, script:  sh 'mvn compil'
+                 if (result != 0) {
+                    echo '[FAILURE] Failed to build'
+                    currentBuild.result = 'FAILURE'
+                    sh "exit ${result}"  
+                 }
             }
         }
         
