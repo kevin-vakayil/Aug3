@@ -10,8 +10,8 @@ pipeline {
                   try {
                         sh 'mvn compil'
                      } catch(Exception e) {
-                      error "This pipeline stops here!"
-                                          }
+                         currentBuild.result = "FAILED"
+                         throw e                                          }
                      }            
                 }
                                 }
