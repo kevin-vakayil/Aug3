@@ -30,7 +30,8 @@ pipeline {
                  try {
                       sh 'mvn tes'
                      } finally {
-                      echo '[FAILURE] Failed to build'
+                      echo '[FAILURE] Failed to build' 
+                      currentBuild.result = 'FAILURE'
                       return
               }
                 
