@@ -1,4 +1,4 @@
-def continueBuild = true
+def skipRemainingStages = false
 pipeline {
     agent any
 
@@ -6,43 +6,41 @@ pipeline {
         stage ('compile maven') {
             
             steps{
-            script{
-                try {
-                     sh 'mvn compil'
+                script{
+                  try {
+                        sh 'mvn compil'
                      } catch(Exception e) {
                       echo '[FAILURE] Failed to build'
                       continueBuild = false
                       currentBuild.result = 'ABORTED'
                       error('Stopping early…')
-              }
-                }            
-        }
-        }
+                                          }
+                     }            
+                }
+                                }
         
         stage ('Testmaven') {
             when {
-                       expression { params.continueBuild != 'true' }
-                   }
-        
-            steps {
-            script{
-                 
-                 try {
-                      sh 'mvn tes'
-                     } finally {
-                      echo '[FAILURE] Failed to build' 
-                      continueBuild = false
-                      currentBuild.result = 'ABORTED'
-                      error('Stopping early…')
-                      return Testmaven
-                 
-              }
-                
-                    }  
-   
-                
+                expression {
+                    !skipRemainingStages
+                }
             }
-        }
+            steps {
+                script{
+                 
+                     try {
+                          sh 'mvn tes'
+                          } finally {
+                              echo '[FAILURE] Failed to build' 
+                              continueBuild = false
+                              currentBuild.result = 'ABORTED'
+                              error('Stopping early…')
+                              return Testmaven
+                 
+                                    }            
+                       }     
+                  }
+                             }
       
         stage ('build maven') {
             steps {
