@@ -7,10 +7,9 @@ pipeline {
             steps{
             script{
                 try {
-                     sh 'mvn compil'
+                     sh 'mvn compile'
                      } finally {
                       echo '[FAILURE] Failed to build'
-                      currentBuild.result = 'FAILURE'
               }
                 }            
         }
