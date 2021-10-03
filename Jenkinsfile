@@ -5,8 +5,14 @@ pipeline {
         stage ('compile maven') {
             
             steps{
-                sh 'mvn compile'
-            }
+            script{
+                try {
+                     sh 'mvn compil'
+                     } finally {
+                      echo '[FAILURE] Failed to build'
+                      currentBuild.result = 'FAILURE'
+              }
+                }            
         }
         
         stage ('test maven') {
