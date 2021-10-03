@@ -21,7 +21,7 @@ pipeline {
         
         stage ('testmaven') {
              when {
-            expression { continueBuild == true }
+            expression { continueBuild }
         }
             steps {
              script{
