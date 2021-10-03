@@ -7,30 +7,28 @@ pipeline {
             steps {
                
                     sh 'mvn compile'
-                 script {
-                    skipRemainingStages = true
-
-                    println "skipRemainingStages = ${skipRemainingStages}"
-                }
+                catchError {
+            build job: 'system-check-flow'
+        }
+        echo currentBuild.result
+    }
             }
         }
        
         stage ('test maven') {
-            when { skipRemainingStages == false {  !skipRemainingStages } }
             steps {
                
                     sh 'mvn test'
-                 script {
-                    skipRemainingStages = true
-
-                    println "skipRemainingStages = ${skipRemainingStages}"
-                }
+                 catchError {
+            build job: 'system-check-flow'
+        }
+        echo currentBuild.result
+    }
                 
             }
         }
       
         stage ('build maven') {
-            when { skipRemainingStages == false {  !skipRemainingStages } }
             steps {
                
                     sh 'mvn package'
