@@ -8,7 +8,7 @@ pipeline {
             steps{
             script{
                 try {
-                     sh 'mvn compile'
+                     sh 'mvn compil'
                      } catch(Exception e) {
                       echo '[FAILURE] Failed to build'
                       continueBuild = false
