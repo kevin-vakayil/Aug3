@@ -22,14 +22,10 @@ pipeline {
                                 }
         
         stage ('Testmaven') {
-            when {
-                expression {
-                    !skipRemainingStages
-                }
-            }
+           
             steps {
                 script{
-                 
+                 if ( if (!skipRemainingStages) {
                      try {
                           sh 'mvn tes'
                           } finally {
@@ -39,7 +35,8 @@ pipeline {
                               error('Stopping early…')
                               return Testmaven
                  
-                                    }            
+                                    }     
+                                                }
                        }     
                   }
                              }
