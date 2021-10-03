@@ -1,4 +1,4 @@
-def continueBuild = True
+def continueBuild = true
 pipeline {
     agent any
 
@@ -11,7 +11,7 @@ pipeline {
                      sh 'mvn compile'
                      } finally {
                       echo '[FAILURE] Failed to build'
-                      continueBuild = False
+                      continueBuild = false
               }
                 }            
         }
@@ -29,7 +29,7 @@ pipeline {
                       sh 'mvn test'
                      } finally {
                       echo '[FAILURE] Failed to build'
-                      continueBuild = False
+                      continueBuild = false
               }
                 
                     }  
