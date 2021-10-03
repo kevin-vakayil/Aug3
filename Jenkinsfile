@@ -25,7 +25,7 @@ pipeline {
            
             steps {
                 script{
-                 if ( if (!skipRemainingStages) {
+                  if (!skipRemainingStages) {
                      try {
                           sh 'mvn tes'
                           } finally {
