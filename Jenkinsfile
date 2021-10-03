@@ -8,7 +8,7 @@ pipeline {
             script{
                 try {
                      sh 'mvn compil'
-                     } finally {
+                     } catch (Exception err) {
                       echo '[FAILURE] Failed to build'
                       return;
               }
