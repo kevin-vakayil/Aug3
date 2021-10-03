@@ -1,4 +1,4 @@
-def skipRemainingStages = false
+def flag = false;
 pipeline {
     agent any
 
@@ -9,6 +9,7 @@ pipeline {
                 script{
                   try {
                         sh 'mvn compil'
+                        script { flag = true }
                      } catch(Exception e) {
                        skipRemainingStages = true
             }
@@ -22,6 +23,7 @@ pipeline {
                                 }
         
         stage ('Testmaven') {
+            when { expression { flag == true } }
            
             steps {
                 script{
