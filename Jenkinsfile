@@ -31,7 +31,7 @@ pipeline {
                       sh 'mvn tes'
                      } finally {
                       echo '[FAILURE] Failed to build'
-                      continueBuild = false
+                      return
               }
                 
                     }  
