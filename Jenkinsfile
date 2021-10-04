@@ -28,7 +28,7 @@ pipeline {
                                 }
                  
                  try {
-                      sh 'mvn tes'
+                      sh 'mvn test'
                      } catch(Exception e) {
                       echo '[FAILURE] Failed to build' 
                       continueBuild = false
