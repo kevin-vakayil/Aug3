@@ -53,7 +53,7 @@ pipeline {
                                 }
                try {
                
-                    sh 'mvn package'
+                    sh 'mvn clean install'
                     } catch(Exception e) {
                       echo '[FAILURE] Failed to build' 
                       currentBuild.result = 'ABORTED'
